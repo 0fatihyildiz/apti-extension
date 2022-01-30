@@ -1,0 +1,29 @@
+{
+  "name": "Apti",
+  "description": "Apti İmza",
+  "version": "1.0",
+  "manifest_version": 3,
+  "main": "index.js",
+  "permissions": ["storage", "activeTab", "scripting","tabs"],
+  "action": {
+    "default_icon": "./favicon.ico",
+    "default_popup": "./popup.html"
+  },
+  "icons": {
+    "16": "./favicon.ico",
+    "48": "./favicon.ico",
+    "128": "./favicon.ico"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail/u/0/*",
+        "http://localhost:3000/*"
+      ],
+      "js": ["index.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
