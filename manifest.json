@@ -20,7 +20,8 @@
         "https://mail.google.com/mail/u/0/*",
         "http://localhost:3000/*"
       ],
-      "js": ["index.js"]
+      "js": ["index.js"],
+      "css": ["main.css"]
     }
   ],
   "background": {
