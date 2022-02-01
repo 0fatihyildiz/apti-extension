@@ -6,7 +6,7 @@
   "main": "index.js",
   "permissions": ["storage", "activeTab", "scripting","tabs"],
   "action": {
-    "default_icon": "./favicon.png"
+    "default_icon": "/icons/48.png"
   },
   "icons": {
     "16": "/icons/16.png",
