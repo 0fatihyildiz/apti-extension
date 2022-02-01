@@ -6,13 +6,13 @@
   "main": "index.js",
   "permissions": ["storage", "activeTab", "scripting","tabs"],
   "action": {
-    "default_icon": "./favicon.ico",
-    "default_popup": "./popup.html"
+    "default_icon": "./favicon.png"
   },
   "icons": {
-    "16": "./favicon.ico",
-    "48": "./favicon.ico",
-    "128": "./favicon.ico"
+    "16": "/icons/16.png",
+    "32": "/icons/32.png",
+    "48": "/icons/48.png",
+    "128": "/icons/128.png"
   },
   "content_scripts": [
     {
@@ -23,8 +23,5 @@
       "js": ["index.js"],
       "css": ["main.css"]
     }
-  ],
-  "background": {
-    "service_worker": "background.js"
-  }
+  ]
 }

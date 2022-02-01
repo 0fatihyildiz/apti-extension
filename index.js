@@ -14,22 +14,21 @@ if (document.getElementById("sendGmail")) {
 const btn = document.createElement("button");
 btn.className = "P5 enjectbtn";
 btn.innerHTML = "İmzayı Ekle";
-btn.id = 'signature';
+btn.id = "signature";
 
 if (location.href == "https://mail.google.com/mail/u/0/#settings/general") {
-  chrome.storage.local.get(["html"], function (result) {
-    setTimeout(function () {
-      // document.getElementById(":2j").innerHTML = result.html;
-      if (document.querySelector(".P4")) {
-        document.querySelector(".P4").appendChild(btn);
-        document.getElementById("signature").addEventListener("click", function () {
+  setTimeout(function () {
+    if (document.querySelector(".P4")) {
+      document.querySelector(".P4").appendChild(btn);
+      document
+        .getElementById("signature")
+        .addEventListener("click", function () {
           chrome.storage.local.get(["html"], function (result) {
             document.getElementById(":2j").innerHTML = result.html;
           });
         });
-      }
-    }, 8000);
-  });
+    }
+  }, 8000);
 }
 
 if (document.querySelector(".J-at1-auR")) {
@@ -37,8 +36,6 @@ if (document.querySelector(".J-at1-auR")) {
     document.querySelector(".P4").appendChild(btn);
   });
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   var btn = document.getElementById("test");
