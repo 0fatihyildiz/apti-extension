@@ -18,7 +18,8 @@
     {
       "matches": [
         "https://mail.google.com/*",
-        "http://localhost:3000/*"
+        "http://localhost:3000/*",
+        "https://apti-signature.vercel.app/*"
       ],
       "js": ["index.js"],
       "css": ["main.css"]
