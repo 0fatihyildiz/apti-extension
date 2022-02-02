@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://mail.google.com/mail/u/0/*",
+        "https://mail.google.com/*",
         "http://localhost:3000/*"
       ],
       "js": ["index.js"],

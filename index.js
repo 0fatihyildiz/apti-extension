@@ -1,3 +1,11 @@
+window.onpopstate = function () {
+  if (
+    document.location == "https://mail.google.com/mail/u/0/#settings/general"
+  ) {
+    location.reload();
+  }
+};
+
 if (document.getElementById("sendGmail")) {
   document.getElementById("sendGmail").addEventListener("click", function () {
     chrome.storage.local.set(
@@ -20,10 +28,9 @@ function createBtn(className, text, id) {
 }
 
 function loader() {
-  console.log("çalıştı loader");
   const div = document.createElement("div");
   div.className = "loader";
-  div.innerHTML = `<div class="text">Lütfen Bekleyin İmza Oluşturuluyor</div><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="shape-rendering: auto;" width="250px" height="250px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+  div.innerHTML = `<div class="text">Lütfen Bekleyin</div><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="shape-rendering: auto;" width="250px" height="250px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
   <circle cx="50" cy="50" r="16" stroke-width="2" stroke="#fff" stroke-dasharray="25.132741228718345 25.132741228718345" fill="none" stroke-linecap="round">
     <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
   </circle>`;
@@ -36,7 +43,22 @@ function loaderdone() {
 }
 
 function state() {
-  console.log("çalıştı");
+  if (document.querySelectorAll(".Ic")[1]) {
+    document.querySelectorAll(".Ic")[1].addEventListener("click", function () {
+      loader();
+      setTimeout(function () {
+        loaderdone();
+        if (document.querySelector(".J-at1-auR")) {
+          document
+            .querySelector(".J-at1-auR")
+            .addEventListener("click", function () {
+              setTimeout(state, 1000);
+            });
+        }
+      }, 1000);
+    });
+  }
+
   if (location.href == "https://mail.google.com/mail/u/0/#settings/general") {
     if (document.querySelector(".P4")) {
       document
@@ -46,7 +68,9 @@ function state() {
         .getElementById("signature")
         .addEventListener("click", function () {
           chrome.storage.local.get(["html"], function (result) {
-            document.getElementById(":2j").innerHTML = result.html;
+            document.getElementById(":2j").focus();
+            document.getElementById(":2j").dispatchEvent(new KeyboardEvent('keydown', {'key': 'a'}));
+            // document.getElementById(":2j").innerHTML = result.html;
           });
         });
     } else {
@@ -72,12 +96,13 @@ function oto() {
         loader();
         document.getElementById(":2p").click();
         setTimeout(function () {
-          if(document.getElementById(":db.in")){
+          if (document.getElementById(":db.in")) {
             document.getElementById(":db.in").value = "Apti İmza";
-          }else if(document.getElementById(":dc.in")){
+          } else if (document.getElementById(":dc.in")) {
             document.getElementById(":dc.in").value = "Apti İmza";
-          }else{
+          } else {
             alert("İmza Eklenemedi Tekrar Deneyin");
+            location.reload();
           }
           setTimeout(function () {
             document.querySelector(".J-at1-auR").click();
