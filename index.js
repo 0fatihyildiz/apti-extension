@@ -37,6 +37,35 @@ function loader() {
   document.body.appendChild(div);
 }
 
+localStorage.setItem("stateSave", false);
+
+function save() {
+  const div = document.createElement("div");
+  div.className = "savemodal";
+  div.innerHTML = `<div class="text">Lütfen Kaydetmek için "Boşluk" tuşuna basın</div>`;
+  localStorage.setItem("stateSave", true);
+  document.body.appendChild(div);
+}
+
+
+document.onkeydown = function(e){
+  e = e || window.event;
+  var key = e.which || e.keyCode;
+  if(key===32){
+    console.log(localStorage.getItem("stateSave"));
+    if(localStorage.getItem("stateSave")=="true"){
+      console.log("save");
+      localStorage.setItem("stateSave", false);
+      document.querySelector(".savemodal").remove();
+      document.getElementById(":2j").focus();
+      setTimeout(function(){
+        document.getElementById(":3g").click();
+      },1000);
+    }
+  }
+}
+
+
 function loaderdone() {
   const div = document.getElementsByClassName("loader")[0];
   div.parentNode.removeChild(div);
@@ -68,9 +97,8 @@ function state() {
         .getElementById("signature")
         .addEventListener("click", function () {
           chrome.storage.local.get(["html"], function (result) {
-            document.getElementById(":2j").focus();
-            document.getElementById(":2j").dispatchEvent(new KeyboardEvent('keydown', {'key': 'a'}));
-            // document.getElementById(":2j").innerHTML = result.html;
+            document.getElementById(":2j").innerHTML = result.html;
+            save();
           });
         });
     } else {
