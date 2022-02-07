@@ -122,7 +122,9 @@ function oto() {
       .getElementById("signatureOTO")
       .addEventListener("click", function () {
         loader();
-        document.getElementById(":2p").click();
+        if(document.getElementById(":2p")){
+          document.getElementById(":2p").click();
+        }
         setTimeout(function () {
           if (document.getElementById(":db.in")) {
             document.getElementById(":db.in").value = "Apti İmza";
