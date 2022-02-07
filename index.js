@@ -48,19 +48,27 @@ function save() {
 }
 
 
-document.onkeydown = function(e){
+document.onkeydown = function (e) {
   e = e || window.event;
   var key = e.which || e.keyCode;
-  if(key===32){
+  if (key === 32) {
     console.log(localStorage.getItem("stateSave"));
-    if(localStorage.getItem("stateSave")=="true"){
+    if (localStorage.getItem("stateSave") == "true") {
       console.log("save");
       localStorage.setItem("stateSave", false);
       document.querySelector(".savemodal").remove();
-      document.getElementById(":2j").focus();
-      setTimeout(function(){
-        document.getElementById(":3g").click();
-      },1000);
+      if (document.getElementById(":2j"))
+        document.getElementById(":2j").focus();
+      else if (document.getElementById(":2l"))
+        document.getElementById(":2l").focus();
+      else if (document.getElementById(":30"))
+        document.getElementById(":30").focus();
+      setTimeout(function () {
+        if (document.getElementById(":3x"))
+          document.getElementById(":3x").click();
+        else if (document.getElementById(":3g"))
+          document.getElementById(":3g").click();
+      }, 1000);
     }
   }
 }
@@ -97,7 +105,12 @@ function state() {
         .getElementById("signature")
         .addEventListener("click", function () {
           chrome.storage.local.get(["html"], function (result) {
-            document.getElementById(":2j").innerHTML = result.html;
+            if (document.getElementById(":2j"))
+              document.getElementById(":2j").innerHTML = result.html;
+            else if (document.getElementById(":2l"))
+              document.getElementById(":2l").innerHTML = result.html;
+            else if (document.getElementById(":30"))
+              document.getElementById(":30").innerHTML = result.html;
             save();
           });
         });
@@ -122,14 +135,22 @@ function oto() {
       .getElementById("signatureOTO")
       .addEventListener("click", function () {
         loader();
-        if(document.getElementById(":2p")){
+        if (document.getElementById(":2p")) {
           document.getElementById(":2p").click();
+        } else if (document.getElementById(":2r")) {
+          document.getElementById(":2r").click();
+        } else if (document.getElementById(":36")) {
+          document.getElementById(":36").click();
+        } else {
+          alert('element okunmadı')
         }
         setTimeout(function () {
           if (document.getElementById(":db.in")) {
             document.getElementById(":db.in").value = "Apti İmza";
           } else if (document.getElementById(":dc.in")) {
             document.getElementById(":dc.in").value = "Apti İmza";
+          } else if (document.getElementById(":eu.in")) {
+            document.getElementById(":eu.in").value = "Apti İmza";
           } else {
             alert("İmza Eklenemedi Tekrar Deneyin");
             location.reload();
