@@ -47,24 +47,24 @@ function save() {
   document.body.appendChild(div);
 }
 
-
-document.onkeydown = function(e){
+document.onkeydown = function (e) {
   e = e || window.event;
   var key = e.which || e.keyCode;
-  if(key===32){
+  if (key === 32) {
     console.log(localStorage.getItem("stateSave"));
-    if(localStorage.getItem("stateSave")=="true"){
+    if (localStorage.getItem("stateSave") == "true") {
       console.log("save");
       localStorage.setItem("stateSave", false);
       document.querySelector(".savemodal").remove();
-      document.getElementById(":2j").focus();
-      setTimeout(function(){
-        document.getElementById(":3g").click();
-      },1000);
+      document.querySelector("div[aria-label='İmza']").focus();
+      setTimeout(function () {
+        document
+          .querySelector("button[guidedhelpid='save_changes_button']")
+          .click();
+      }, 1000);
     }
   }
-}
-
+};
 
 function loaderdone() {
   const div = document.getElementsByClassName("loader")[0];
@@ -72,20 +72,22 @@ function loaderdone() {
 }
 
 function state() {
-  if (document.querySelectorAll(".Ic")[1]) {
-    document.querySelectorAll(".Ic")[1].addEventListener("click", function () {
-      loader();
-      setTimeout(function () {
-        loaderdone();
-        if (document.querySelector(".J-at1-auR")) {
-          document
-            .querySelector(".J-at1-auR")
-            .addEventListener("click", function () {
-              setTimeout(state, 1000);
-            });
-        }
-      }, 1000);
-    });
+  if (document.querySelector("span[data-action='delete']")) {
+    document
+      .querySelector("span[data-action='delete']")
+      .addEventListener("click", function () {
+        loader();
+        setTimeout(function () {
+          loaderdone();
+          if (document.querySelector("button[name='ok']")) {
+            document
+              .querySelector("button[name='ok']")
+              .addEventListener("click", function () {
+                setTimeout(state, 1000);
+              });
+          }
+        }, 1000);
+      });
   }
 
   if (location.href == "https://mail.google.com/mail/u/0/#settings/general") {
@@ -97,7 +99,9 @@ function state() {
         .getElementById("signature")
         .addEventListener("click", function () {
           chrome.storage.local.get(["html"], function (result) {
-            document.getElementById(":2j").innerHTML = result.html;
+            if (document.querySelector("div[aria-label='İmza']"))
+              document.querySelector("div[aria-label='İmza']").innerHTML =
+                result.html;
             save();
           });
         });
@@ -116,24 +120,28 @@ function state() {
   }
 }
 
+console.log("Mustafa is my girl");
+
 function oto() {
   if (document.getElementById("signatureOTO")) {
     document
       .getElementById("signatureOTO")
       .addEventListener("click", function () {
         loader();
-        document.getElementById(":2p").click();
+        if (document.querySelector("button[aria-label='Yeni bir imza oluştur'")) {
+          document.querySelector("button[aria-label='Yeni bir imza oluştur'").click();
+        } else {
+          alert("element okunmadı");
+        }
         setTimeout(function () {
-          if (document.getElementById(":db.in")) {
-            document.getElementById(":db.in").value = "Apti İmza";
-          } else if (document.getElementById(":dc.in")) {
-            document.getElementById(":dc.in").value = "Apti İmza";
+          if (document.querySelector("input[placeholder='İmza adı'")) {
+            document.querySelector("input[placeholder='İmza adı'").value = "Apti İmza";
           } else {
             alert("İmza Eklenemedi Tekrar Deneyin");
             location.reload();
           }
           setTimeout(function () {
-            document.querySelector(".J-at1-auR").click();
+            document.querySelector("button[name='ok']").click();
             loaderdone();
             state();
           }, 1000);

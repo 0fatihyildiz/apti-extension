@@ -2,7 +2,7 @@
   "name": "Apti",
   "description": "Apti İmza",
   "version": "1.0",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "main": "index.js",
   "permissions": ["storage", "activeTab", "scripting","tabs"],
   "action": {
