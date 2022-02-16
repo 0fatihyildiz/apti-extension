@@ -120,8 +120,6 @@ function state() {
   }
 }
 
-console.log("Mustafa is my girl");
-
 function oto() {
   if (document.getElementById("signatureOTO")) {
     document
