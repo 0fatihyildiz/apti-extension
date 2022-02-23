@@ -1,6 +1,6 @@
 window.onpopstate = function () {
   if (
-    document.location == "https://mail.google.com/mail/u/0/#settings/general"
+    document.location == "https://mail.google.com/mail/u/0/#settings/general" || document.location == "https://mail.google.com/mail/u/1/#settings/general"
   ) {
     location.reload();
   }
