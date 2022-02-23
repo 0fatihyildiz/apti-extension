@@ -1,6 +1,6 @@
 window.onpopstate = function () {
   if (
-    document.location == "https://mail.google.com/mail/u/0/#settings/general" || "https://mail.google.com/mail/u/1/#settings/general"
+    document.location == "https://mail.google.com/mail/u/1/#settings/general"
   ) {
     location.reload();
   }
@@ -13,7 +13,7 @@ if (document.getElementById("sendGmail")) {
         html: document.getElementById("maill").innerHTML,
       },
       function () {
-        location.href = "https://mail.google.com/mail/u/0/#settings/general";
+        location.href = "https://mail.google.com/mail/u/1/#settings/general";
       }
     );
   });
@@ -90,7 +90,7 @@ function state() {
       });
   }
 
-  if (location.href == "https://mail.google.com/mail/u/0/#settings/general") {
+  if (location.href == "https://mail.google.com/mail/u/1/#settings/general") {
     if (document.querySelector(".P4")) {
       document
         .querySelector(".P4")
