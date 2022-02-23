@@ -1,11 +1,12 @@
+const url = document.location;
+const regx = /http[s]?:\/\/?mail.google.com\/mail\/u\/(\d{0,9})\/#settings\/general/;
+console.log("inject");
 window.onpopstate = function () {
-  if (
-    document.location == "https://mail.google.com/mail/u/0/#settings/general" || "https://mail.google.com/mail/u/1/#settings/general"
-  ) {
+  if (regx.test(url)) {
+    console.log("popstate");
     location.reload();
   }
 };
-
 if (document.getElementById("sendGmail")) {
   document.getElementById("sendGmail").addEventListener("click", function () {
     chrome.storage.local.set(
@@ -18,7 +19,6 @@ if (document.getElementById("sendGmail")) {
     );
   });
 }
-
 function createBtn(className, text, id) {
   const btn = document.createElement("button");
   btn.className = className;
@@ -26,7 +26,6 @@ function createBtn(className, text, id) {
   btn.id = id;
   return btn;
 }
-
 function loader() {
   const div = document.createElement("div");
   div.className = "loader";
@@ -36,9 +35,7 @@ function loader() {
   </circle>`;
   document.body.appendChild(div);
 }
-
 localStorage.setItem("stateSave", false);
-
 function save() {
   const div = document.createElement("div");
   div.className = "savemodal";
@@ -46,7 +43,6 @@ function save() {
   localStorage.setItem("stateSave", true);
   document.body.appendChild(div);
 }
-
 document.onkeydown = function (e) {
   e = e || window.event;
   var key = e.which || e.keyCode;
@@ -65,12 +61,10 @@ document.onkeydown = function (e) {
     }
   }
 };
-
 function loaderdone() {
   const div = document.getElementsByClassName("loader")[0];
   div.parentNode.removeChild(div);
 }
-
 function state() {
   if (document.querySelector("span[data-action='delete']")) {
     document
@@ -89,8 +83,7 @@ function state() {
         }, 1000);
       });
   }
-
-  if (location.href == "https://mail.google.com/mail/u/0/#settings/general") {
+  if (regx.test(url)) {
     if (document.querySelector(".P4")) {
       document
         .querySelector(".P4")
@@ -119,7 +112,6 @@ function state() {
     }
   }
 }
-
 function oto() {
   if (document.getElementById("signatureOTO")) {
     document
@@ -147,9 +139,7 @@ function oto() {
       });
   }
 }
-
 function back() {
   state();
 }
-
 state();
