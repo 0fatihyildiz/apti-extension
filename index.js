@@ -14,7 +14,7 @@ if (document.getElementById("sendGmail")) {
         html: document.getElementById("maill").innerHTML,
       },
       function () {
-        location.href = "https://mail.google.com/mail/u/0/#settings/general";
+        location.href = "https://mail.google.com/mail/u/1/#settings/general";
       }
     );
   });
