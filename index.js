@@ -1,24 +1,70 @@
 const url = document.location;
-const regx = /http[s]?:\/\/?mail.google.com\/mail\/u\/(\d{0,9})\/#settings\/general/;
+const regx =
+  /http[s]?:\/\/?mail.google.com\/mail\/u\/(\d{0,2})\/#settings\/general/;
+const regx1 =
+  /http[s]?:\/\/?mail.google.com\/mail\/u\/(\d{0,2})\/#inbox\?compose=new/;
 console.log("inject");
 window.onpopstate = function () {
   if (regx.test(url)) {
     console.log("popstate");
     location.reload();
+  } else if (regx1.test(url)) {
+    loader();
+    setTimeout(function () {
+      if (document.querySelector(".bAs")) {
+        document
+          .querySelector(".bAs")
+          .insertAdjacentHTML(
+            "afterbegin",
+            '<div id="btncontainer" class="aoD az6"><button class="P5" id="mailbtnapti">Mail Şablonunu Ekle</button></div>'
+          );
+          setTimeout(() => {
+            if(document.getElementById("btncontainer")){
+              document.getElementById("mailbtnapti").addEventListener("click", function () {
+                console.log("click");
+                chrome.storage.local.get(["template"], function (result) {
+                  if (document.querySelector('.editable'))
+                  document.querySelector('.editable').innerHTML = result.template;
+                });
+              });
+            }
+          }, 1000);
+        loaderdone();
+      }
+    }, 500);
   }
 };
+
+// click event not error
+
 if (document.getElementById("sendGmail")) {
   document.getElementById("sendGmail").addEventListener("click", function () {
     chrome.storage.local.set(
       {
-        html: document.getElementById("maill").innerHTML,
+        signature: document.getElementById("maill").innerHTML,
       },
       function () {
-        location.href = "https://mail.google.com/mail/u/1/#settings/general";
+        location.href = "https://mail.google.com/mail/u/0/#settings/general";
       }
     );
   });
 }
+
+if (document.getElementById("sendGmailMail")) {
+  document
+    .getElementById("sendGmailMail")
+    .addEventListener("click", function () {
+      chrome.storage.local.set(
+        {
+          template: document.getElementById("maill").innerHTML,
+        },
+        function () {
+          location.href = "https://mail.google.com/mail/u/0/#inbox?compose=new";
+        }
+      );
+    });
+}
+
 function createBtn(className, text, id) {
   const btn = document.createElement("button");
   btn.className = className;
@@ -26,6 +72,7 @@ function createBtn(className, text, id) {
   btn.id = id;
   return btn;
 }
+
 function loader() {
   const div = document.createElement("div");
   div.className = "loader";
@@ -35,6 +82,7 @@ function loader() {
   </circle>`;
   document.body.appendChild(div);
 }
+
 localStorage.setItem("stateSave", false);
 function save() {
   const div = document.createElement("div");
@@ -91,10 +139,10 @@ function state() {
       document
         .getElementById("signature")
         .addEventListener("click", function () {
-          chrome.storage.local.get(["html"], function (result) {
+          chrome.storage.local.get(["signature"], function (result) {
             if (document.querySelector("div[aria-label='İmza']"))
               document.querySelector("div[aria-label='İmza']").innerHTML =
-                result.html;
+                result.signature;
             save();
           });
         });
@@ -118,14 +166,19 @@ function oto() {
       .getElementById("signatureOTO")
       .addEventListener("click", function () {
         loader();
-        if (document.querySelector("button[aria-label='Yeni bir imza oluştur'")) {
-          document.querySelector("button[aria-label='Yeni bir imza oluştur'").click();
+        if (
+          document.querySelector("button[aria-label='Yeni bir imza oluştur'")
+        ) {
+          document
+            .querySelector("button[aria-label='Yeni bir imza oluştur'")
+            .click();
         } else {
           alert("element okunmadı");
         }
         setTimeout(function () {
           if (document.querySelector("input[placeholder='İmza adı'")) {
-            document.querySelector("input[placeholder='İmza adı'").value = "Apti İmza";
+            document.querySelector("input[placeholder='İmza adı'").value =
+              "Apti İmza";
           } else {
             alert("İmza Eklenemedi Tekrar Deneyin");
             location.reload();

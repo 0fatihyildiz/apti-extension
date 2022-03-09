@@ -19,7 +19,8 @@
       "matches": [
         "https://mail.google.com/*",
         "http://localhost:3000/*",
-        "https://apti-signature.vercel.app/*"
+        "https://apti-signature.vercel.app/*",
+        "https://apti-mail.vercel.app/*"
       ],
       "js": ["index.js"],
       "css": ["main.css"]
