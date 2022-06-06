@@ -20,6 +20,7 @@
         "https://mail.google.com/*",
         "http://localhost:3000/*",
         "https://apti-signature.vercel.app/*",
+        "https://edis-signature.vercel.app/*",
         "https://apti-mail.vercel.app/*"
       ],
       "js": ["index.js"],
